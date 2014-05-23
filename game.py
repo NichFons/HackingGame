@@ -13,8 +13,9 @@ def grabWords(setting):
              "./text_files/medium.txt", "./text_files/hard.txt", \
              "./text_files/very_hard.txt"]
     number = [6, 7, 8, 9, 10]
-    word_file = fopen(files[setting - 1])
-    return sample(word_file, number[setting - 1])
+    word_file = open(words[setting - 1])
+    right_words = [i.strip('\n') for i in word_file]
+    return sample(right_words, number[setting - 1])
 
 # The actual game loop, that takes a guess and checks it!
 # Returns if the game is won or not
@@ -31,24 +32,41 @@ def game_loop(correct_word, word_list, guess_num):
         print("{} / {} correct.".format(correct, len(guess)))
         if (correct == len(guess)):
             return True
+        
         else:
             return False
 
 # Put it all together
 def hack():
     diff = input("Enter difficulty(1-5): ")
-    words = grabWords(diff)
+    try:
+        # If it isn' it
+        diff = int(diff)
+    except ValueError:
+        # Make it not pass number check
+        diff = 0
+    if diff > 0 and diff < 6:
+        words = grabWords(int(diff))
+    else:
+        print("Please input integer 1-5")
+        hack()
+        return
     password = sample(words, 1)[0] # Sample returns a list, get the only thing
     for i in words:
         print(i)
+    print()
     for i in range(1,5):
         win = game_loop(password, words, i)
         if win:
             print("You win!")
-    play = input("Enter 0 to play again")
-    if int(play) == 0:
+            break
+    play = input("Enter 0 to play again, else to quit: ")
+    if play == '0':
+        print('\n\n\n')
         hack()
-    
+
+
+hack()
 
             
             
