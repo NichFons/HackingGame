@@ -35,3 +35,5 @@ The logic and design of how many words you display and the length based on the d
 Divides enable1.txt into 5 setting files, allowing for only one length of text to be inputted.
 
 Simply run in console and follow the directions to play the game.
+
+Looking to improve by running in a window.

@@ -5,7 +5,10 @@
 ########hints#########
 
 from random import sample
+import tkinter as tk
 
+
+screen = tk.Tk("Hacking Game")
 # Takes the setting and creates a file ID and the correct number of words
 # Returns a list of words
 def grabWords(setting):
